@@ -1,0 +1,176 @@
+SKYSCREEN - macOS Installation Instructions
+========================================================================
+
+NOTE: This application requires macOS to run. It cannot run in Replit's Linux environment.
+
+INSTALLATION ON YOUR MAC:
+-------------------------
+
+METHOD 1: Create a Native macOS Installer (Recommended)
+--------------------------------------------------------
+
+1. Extract the SkyScreen release ZIP.
+
+2. Control-click 'create_macos_installer.command' and choose Open.
+
+3. Wait for the app and installer to build.
+
+4. Open 'dist/SkyScreen-1.1.0.pkg' and follow the installer.
+
+5. Enable SkyScreen in:
+   System Settings → Privacy & Security → Accessibility
+
+
+METHOD 2: Launch Agent (Auto-start background service)
+---------------------------------------------------------------------
+
+1. Download all files to your Mac
+
+2. Open Terminal and navigate to the folder:
+   cd /path/to/downloaded/files
+
+3. Install dependencies:
+   chmod +x setup_macos.sh
+   ./setup_macos.sh
+
+4. Install background service:
+   chmod +x install_background.sh
+   ./install_background.sh
+
+5. The app is now running! Look for the ● icon in your menu bar
+   It will auto-start every time you log in
+
+
+METHOD 3: Simple Double-Click Launcher
+---------------------------------------
+
+1. Download files and install dependencies (if not done):
+   chmod +x setup_macos.sh
+   ./setup_macos.sh
+
+2. Make launcher executable:
+   chmod +x run_monitor_position.command
+
+3. Double-click 'run_monitor_position.command' to run the app
+   (A terminal window will appear but you can minimize it)
+
+4. OPTIONAL - Add to Login Items:
+   • System Settings → General → Login Items
+   • Click '+' and select 'run_monitor_position.command'
+
+METHOD 4: Run Python Script Directly in Terminal
+-------------------------------------------------
+
+1. Download files and install dependencies:
+   chmod +x setup_macos.sh
+   ./setup_macos.sh
+
+2. Run the script:
+   python3 monitor_position.py
+
+3. Keep the Terminal window open while using the app
+
+USING THE APP:
+--------------
+
+ICON STATES:
+• Darker gray ● = Idle (no positioning active)
+• Blinking bright white ● = Positioning window active
+• White arrow (↑↓←→↖↗↙↘) = Monitor successfully positioned
+• Red crossed arrow = Position blocked by collision
+
+SINGLE EXTERNAL MONITOR:
+1. The app appears as a darker ● icon in your Mac's menu bar
+
+2. When you connect an external monitor:
+   - The ● icon will start BLINKING (bright white)
+   - You have 30 seconds to position the monitor
+   
+3. While the icon is blinking, press Cmd + Arrow Key:
+   - Cmd + ← = Position monitor LEFT of main display
+   - Cmd + → = Position monitor RIGHT of main display
+   - Cmd + ↑ = Position monitor ABOVE main display
+   - Cmd + ↓ = Position monitor BELOW main display
+   - Cmd + ↑ + ← = Position monitor TOP-LEFT (corner)
+   - Cmd + ↑ + → = Position monitor TOP-RIGHT (corner)
+   - Cmd + ↓ + ← = Position monitor BOTTOM-LEFT (corner)
+   - Cmd + ↓ + → = Position monitor BOTTOM-RIGHT (corner)
+
+4. The icon will change to show your choice:
+   - White arrow (↑↓←→↖↗↙↘) = Position successful
+   - Red crossed arrow = Position blocked (collision detected)
+
+5. You can reposition multiple times within the 30-second window
+
+MULTIPLE EXTERNAL MONITORS:
+1. All monitors position relative to your MAIN display
+   - Build your layout around your main screen
+
+2. After positioning one monitor, you automatically get another
+   30-second window to position the next monitor
+
+3. Use the same shortcuts for each monitor:
+   - Cmd + ↑ = Above main display
+   - Cmd + ↓ = Below main display
+   - Cmd + ← = Left of main display
+   - Cmd + → = Right of main display
+   - Cmd + ↑ + ← = Top-left corner of main display
+   - Cmd + ↑ + → = Top-right corner of main display
+   - Cmd + ↓ + ← = Bottom-left corner of main display
+   - Cmd + ↓ + → = Bottom-right corner of main display
+
+4. If a position would overlap another display, you'll see a RED
+   CROSSED ARROW and the position is blocked
+
+5. Each monitor gets its own 30-second positioning window
+
+6. Example: Connect 2 monitors, press Cmd+↑ for the first (above),
+   then Cmd+↑+← for the second (top-left corner)
+
+MANUAL ACTIVATION:
+• Click the menu bar icon → "Activate Positioning" to manually
+  start positioning anytime
+
+PERMISSIONS:
+------------
+
+macOS may ask for accessibility permissions the first time you run the app.
+This is required for the app to detect keyboard shortcuts.
+
+To grant permissions:
+1. Go to System Preferences → Security & Privacy → Privacy → Accessibility
+2. Click the lock to make changes
+3. Add Terminal or Python to the allowed apps
+
+MANAGING BACKGROUND SERVICE:
+----------------------------
+
+If you used the background installation (install_background.sh):
+
+To stop the background service:
+   launchctl unload ~/Library/LaunchAgents/com.skyscreen.app.plist
+
+To start the background service again:
+   launchctl load ~/Library/LaunchAgents/com.skyscreen.app.plist
+
+To check if it's running:
+   launchctl list | grep skyscreen
+
+View logs:
+   tail -f /tmp/skyscreen.log
+   tail -f /tmp/skyscreen_error.log
+
+TROUBLESHOOTING:
+----------------
+
+If the app doesn't detect your monitor:
+- Make sure the monitor is properly connected
+- Try disconnecting and reconnecting the monitor
+- Check that the app is running (icon should be in menu bar)
+
+If keyboard shortcuts don't work:
+- Grant accessibility permissions (see PERMISSIONS section above)
+- Make sure you press Cmd + Arrow within 30 seconds of connecting the monitor
+
+To quit the app:
+- Click the menu bar icon and select "Quit"
