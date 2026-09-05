@@ -1,0 +1,133 @@
+SKYSCREEN - Windows Installation Instructions
+=========================================================================
+
+This application allows you to quickly position external monitors using
+keyboard shortcuts when they are connected to your Windows PC.
+
+
+QUICK START (Recommended - Run from Python):
+--------------------------------------------
+
+1. Download all files from the 'windows' folder to your PC
+
+2. Make sure Python is installed:
+   - Download from: https://www.python.org/downloads/
+   - IMPORTANT: Check "Add Python to PATH" during installation!
+
+3. Double-click 'setup_windows.bat' to install dependencies
+
+4. Double-click 'run_monitor_position.bat' to start the app
+   - Look for the icon in the system tray (bottom-right corner)
+
+
+BUILDING AN INSTALLER (For Distribution):
+-----------------------------------------
+
+If you want to create a standalone installer:
+
+1. Run 'build_exe.bat' to create the executable
+   - This creates 'dist\SkyScreen.exe'
+
+2. Download Inno Setup from: https://jrsoftware.org/isdl.php
+
+3. Run 'create_installer.bat' to create the installer
+   - Creates 'installer_output\SkyScreen_Setup.exe'
+
+
+USING THE APP:
+--------------
+
+ICON STATES (in system tray):
+• Darker gray dot = Idle (no positioning active)
+• Blinking bright dot = Positioning window active
+• White arrow = Monitor successfully positioned
+• Red crossed arrow = Position blocked by collision
+
+SINGLE EXTERNAL MONITOR:
+1. The app appears as an icon in the Windows system tray (bottom-right)
+
+2. When you connect an external monitor:
+   - The icon will start BLINKING
+   - You have 30 seconds to position the monitor
+   
+3. While the icon is blinking, press Ctrl + Arrow Key:
+   - Ctrl + ← = Position monitor LEFT of primary display
+   - Ctrl + → = Position monitor RIGHT of primary display
+   - Ctrl + ↑ = Position monitor ABOVE primary display
+   - Ctrl + ↓ = Position monitor BELOW primary display
+   - Ctrl + ↑ + ← = Position monitor TOP-LEFT (corner)
+   - Ctrl + ↑ + → = Position monitor TOP-RIGHT (corner)
+   - Ctrl + ↓ + ← = Position monitor BOTTOM-LEFT (corner)
+   - Ctrl + ↓ + → = Position monitor BOTTOM-RIGHT (corner)
+
+4. The icon will change to show your choice:
+   - White arrow (↑↓←→↖↗↙↘) = Position successful
+   - Red crossed arrow = Position blocked (collision detected)
+
+5. You can reposition multiple times within the 30-second window
+
+MULTIPLE EXTERNAL MONITORS:
+1. All monitors position relative to your PRIMARY display
+   - Build your layout around your main screen
+
+2. After positioning one monitor, you automatically get another
+   30-second window to position the next monitor
+
+3. Use the same shortcuts for each monitor:
+   - Ctrl + ↑ = Above primary display
+   - Ctrl + ↓ = Below primary display
+   - Ctrl + ← = Left of primary display
+   - Ctrl + → = Right of primary display
+   - Ctrl + ↑ + ← = Top-left corner of primary display
+   - Ctrl + ↑ + → = Top-right corner of primary display
+   - Ctrl + ↓ + ← = Bottom-left corner of primary display
+   - Ctrl + ↓ + → = Bottom-right corner of primary display
+
+4. If a position would overlap another display, you'll see a RED
+   CROSSED arrow and the position is blocked
+
+5. Each monitor gets its own 30-second positioning window
+
+6. Example: Connect 2 monitors, press Ctrl+↑ for the first (above),
+   then Ctrl+↑+← for the second (top-left corner)
+
+MANUAL ACTIVATION:
+• Right-click the system tray icon → "Activate Positioning" to manually
+  start positioning anytime
+
+
+AUTO-START WITH WINDOWS:
+------------------------
+
+Option 1: During Installation
+- When running the installer, check "Start automatically with Windows"
+
+Option 2: Manual Setup
+1. Press Win + R, type: shell:startup
+2. Create a shortcut to "SkyScreen.exe" in this folder
+
+
+TROUBLESHOOTING:
+----------------
+
+If the app doesn't appear in system tray:
+- Click the ^ arrow in the system tray to see hidden icons
+- Right-click taskbar → Taskbar settings → Select which icons appear
+
+If keyboard shortcuts don't work:
+- Make sure the app is running (icon in system tray)
+- Try running as Administrator
+- Check that no other app is using the same shortcuts
+
+If monitor positioning fails:
+- Try running as Administrator
+- Some display drivers may require a restart after changes
+
+
+DIFFERENCES FROM macOS VERSION:
+-------------------------------
+
+- Uses Ctrl + Arrow keys (instead of Cmd + Arrow)
+- Icon appears in Windows system tray (instead of menu bar)
+- Uses Windows display APIs for positioning
+- Installation via .exe installer or Python script
