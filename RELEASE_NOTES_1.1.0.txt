@@ -1,0 +1,33 @@
+SKYSCREEN 1.1.0
+===============
+
+WHAT'S NEW
+- Position monitors in all four corners with Cmd plus two arrow keys.
+- Every external monitor is positioned relative to the main display.
+- Unplugging one monitor does not move the remaining monitors.
+- Fixed a startup failure caused by the launcher using a different Python
+  installation from the setup script.
+- Startup errors now remain visible instead of the launcher closing silently.
+- The native app build explicitly includes the required macOS frameworks.
+
+INSTALL
+1. Extract the downloaded ZIP file.
+2. Control-click create_macos_installer.command and choose Open.
+3. The builder creates dist/SkyScreen-1.1.0.pkg.
+4. Double-click the .pkg file and follow the macOS installer.
+5. Enable SkyScreen under:
+   System Settings > Privacy & Security > Accessibility
+
+QUICK INSTALL ALTERNATIVE
+- Control-click install.command and choose Open to build and install SkyScreen
+  directly into your user Applications folder.
+
+SHORTCUTS
+- Cmd + Left: left
+- Cmd + Right: right
+- Cmd + Up: above
+- Cmd + Down: below
+- Cmd + Up + Left: top-left
+- Cmd + Up + Right: top-right
+- Cmd + Down + Left: bottom-left
+- Cmd + Down + Right: bottom-right
